@@ -9,3 +9,6 @@
 stats-drill-progress-*.json
 
 .DS_Store
+
+# local dev server config
+.claude/
