@@ -1,0 +1,11 @@
+# Never commit a GitHub token. This repo is public, and GitHub auto-revokes
+# any token it finds in public code. The sync token belongs in the app's
+# input box on each device (localStorage), never in a file here.
+*.token
+.env
+.env.*
+
+# Progress backups downloaded from the app
+stats-drill-progress-*.json
+
+.DS_Store
