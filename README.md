@@ -17,14 +17,17 @@ Progress is saved in your browser automatically.
 Progress can sync between your laptop and phone through a private GitHub Gist. Setup is once
 per device.
 
-1. Go to **github.com/settings/tokens** → *Fine-grained tokens* → **Generate new token**
-2. Expiration: 90 days. Repository access: **Public repositories** (read-only is fine — we
-   don't touch repos).
-3. Under **Account permissions**, set **Gists → Read and write**. Leave everything else alone.
-4. Generate, copy the token.
+1. Go to **github.com/settings/tokens** → **Tokens (classic)** → *Generate new token (classic)*
+2. Tick the single **`gist`** checkbox. Nothing else — it doesn't need repo access.
+3. Expiration: 90 days is plenty.
+4. Generate, copy the token. It starts with `ghp_`.
 5. Open the app → **Progress** → **Connect sync** → paste the token → **Connect**.
 
 Repeat steps 4–5 on your other device with the same token. The app finds the gist by itself.
+
+> **It has to be a classic token.** Fine-grained tokens are rejected by GitHub's gists API —
+> it only accepts the classic `gist` scope. A fine-grained one fails with "Bad credentials"
+> no matter which permissions you tick.
 
 The token is stored only in that device's `localStorage`. It is never committed to this repo —
 and it must not be, since this repo is public and GitHub revokes tokens it finds in public code.

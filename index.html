@@ -268,9 +268,12 @@
           <button class="chip wide" id="syncCancel">Cancel</button>
         </div>
         <div class="savemsg">
-          Make one at <b>github.com/settings/tokens</b> &rarr; fine-grained token &rarr;
-          Account permissions &rarr; <b>Gists: read and write</b>. Nothing else needs enabling.
-          It is stored only on this device and never leaves it except to talk to GitHub.
+          Make one at <b>github.com/settings/tokens</b> &rarr; <b>Tokens (classic)</b> &rarr;
+          Generate new token, and tick the single <b>gist</b> box. Nothing else.
+          It will start with <b>ghp_</b>.
+          <br>Fine-grained tokens do <b>not</b> work here &mdash; GitHub's gists API only accepts
+          the classic <b>gist</b> scope, and a fine-grained one comes back rejected.
+          <br>The token is stored only on this device and never leaves it except to talk to GitHub.
         </div>
       </div>
       <div id="saveMsg" class="savemsg"></div>
@@ -360,7 +363,7 @@ const Sync = (() => {
     });
     if(!r.ok){
       throw new Error(
-        r.status === 401 ? "GitHub rejected the token — it may have expired. Reconnect with a new one."
+        r.status === 401 ? "GitHub rejected the token. The usual cause is a fine-grained token — those don't work with gists. Make a classic one (Tokens (classic) → tick 'gist'), it starts with ghp_. Otherwise the token has expired or was pasted incompletely."
       : r.status === 403 ? "GitHub refused. The token probably lacks the Gists permission."
       : r.status === 404 ? "That gist is gone. Disconnect and reconnect to make a new one."
       : `GitHub returned ${r.status}.`);
